@@ -1,4 +1,6 @@
 """Text -> vector, using the Gemini embedding API."""
+import hashlib
+import json
 import time
 from functools import lru_cache
 
@@ -8,6 +10,7 @@ from google.genai import types
 from app.config import settings
 
 BATCH = 50
+CACHE_FILE = settings.kb_dir / "embeddings_cache.json"
 
 
 class EmbeddingUnavailable(Exception):
@@ -46,9 +49,48 @@ def _embed(texts: list[str], task_type: str) -> list[list[float]]:
     return out
 
 
+def _key(text: str, task_type: str) -> str:
+    raw = f"{settings.gemini_embed_model}|{settings.embed_dim}|{task_type}|{text}"
+    return hashlib.sha256(raw.encode("utf-8")).hexdigest()
+
+
+def _load_cache() -> dict:
+    try:
+        return json.loads(CACHE_FILE.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return {}
+
+
+def _save_cache(cache: dict) -> None:
+    try:
+        tmp = CACHE_FILE.with_suffix(".tmp")
+        tmp.write_text(json.dumps(cache), encoding="utf-8")
+        tmp.replace(CACHE_FILE)
+    except OSError:
+        pass  # read-only disk: keep working without persisting
+
+
 def embed_documents(texts: list[str]) -> list[list[float]]:
-    return _embed(texts, "RETRIEVAL_DOCUMENT")
+    """Embed knowledge-base documents, reusing cached vectors for unchanged text.
+
+    The free tier allows ~100 embedding requests per minute; without the cache every
+    restart would re-embed the whole knowledge base.
+    """
+    cache = _load_cache()
+    keys = [_key(t, "RETRIEVAL_DOCUMENT") for t in texts]
+    missing = [(k, t) for k, t in zip(keys, texts) if k not in cache]
+    if missing:
+        vectors = _embed([t for _, t in missing], "RETRIEVAL_DOCUMENT")
+        for (k, _), v in zip(missing, vectors):
+            cache[k] = [round(float(x), 6) for x in v]
+        _save_cache(cache)
+    return [cache[k] for k in keys]
+
+
+@lru_cache(maxsize=256)
+def _embed_query_cached(text: str) -> tuple[float, ...]:
+    return tuple(_embed([text], "RETRIEVAL_QUERY")[0])
 
 
 def embed_query(text: str) -> list[float]:
-    return _embed([text], "RETRIEVAL_QUERY")[0]
+    return list(_embed_query_cached(text))

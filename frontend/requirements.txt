@@ -1,4 +1,14 @@
 streamlit
+plotly
 requests
 pandas
-plotly
+numpy
+scipy
+sqlalchemy
+pg8000
+pydantic
+pydantic-settings
+python-dotenv
+lightgbm
+chromadb
+google-genai

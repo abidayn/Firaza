@@ -144,8 +144,11 @@ def explain(db: Session, rec: dict) -> dict:
     """Return the cached explanation or create one (LLM with fallback)."""
     request_id = rec["request_id"]
     cached = db.scalar(select(models.Explanation).where(models.Explanation.request_id == request_id))
-    if cached:
+    if cached and cached.source == "llm":
         return _out(cached)
+    if cached:  # a template answer from an earlier outage: try the LLM again
+        db.delete(cached)
+        db.commit()
 
     source, model, sources = "fallback", "", []
     text = fallback_explanation(rec)
