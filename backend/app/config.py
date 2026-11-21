@@ -16,10 +16,10 @@ class Settings(BaseSettings):
     database_url: str = "sqlite:///./firaza.db"
     gemini_api_key: str = ""
     # comma-separated: tried in order until one answers
-    gemini_gen_model: str = "models/gemini-3.5-flash-lite,models/gemini-3.8-flash"
+    gemini_gen_model: str = "models/gemini-3.5-flash-lite,models/gemini-3.1-flash-lite,models/gemini-3.8-flash"
     gemini_embed_model: str = "models/gemini-embedding-2"
     embed_dim: int = 768
-    llm_timeout_s: int = 20
+    llm_timeout_s: int = 10
 
     artifacts_dir: Path = BACKEND_DIR / "artifacts"
     kb_dir: Path = BACKEND_DIR / "kb"

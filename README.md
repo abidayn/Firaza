@@ -92,7 +92,7 @@ docs/      PRE_READ, DATA_CARD, MODEL_CARD, ARCHITECTURE, USER_GUIDE, DEPLOY, SB
 - Lewis, P. et al. (2020). *Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks*. NeurIPS.
 - Järvelin, K., & Kekäläinen, J. (2002). *Cumulated Gain-Based Evaluation of IR Techniques*. ACM TOIS (NDCG).
 - Hwang, C. L., & Yoon, K. (1981). *Multiple Attribute Decision Making*. Springer (TOPSIS baseline).
-- Google Gemini API (embeddings `gemini-embedding-2`, generation `gemini-3.5-flash-lite` / `gemini-3.8-flash`).
+- Google Gemini API (embeddings `gemini-embedding-2`, generation `gemini-3.5-flash-lite`, fallback `gemini-3.1-flash-lite` / `gemini-3.8-flash`).
 - Dicoding Bootcamp Batch 15, *Use Case UMKM — Firaza*.
 - Libraries and licenses: [`docs/SBOM.md`](docs/SBOM.md), notes in [`docs/LICENSE_NOTES.md`](docs/LICENSE_NOTES.md).
 

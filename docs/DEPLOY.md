@@ -26,7 +26,7 @@ Expected: `{'seeded': True, 'vendors': 32, ...}`.
    - Secrets (paste, replacing the placeholders with your real values):
      ```toml
      GEMINI_API_KEY = "your-key"
-     GEMINI_GEN_MODEL = "models/gemini-3.5-flash-lite,models/gemini-3.8-flash"
+     GEMINI_GEN_MODEL = "models/gemini-3.5-flash-lite,models/gemini-3.1-flash-lite,models/gemini-3.8-flash"
      GEMINI_EMBED_MODEL = "models/gemini-embedding-2"
      DATABASE_URL = "postgresql://...your Neon string..."
      ```
