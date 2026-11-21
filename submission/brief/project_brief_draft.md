@@ -1,6 +1,6 @@
-# Project Brief (draf isi) — DB15-I036
+# Project Brief — Firaza Vendor Recommendation & Procurement Assistant
 
-> Template resmi Project Brief belum ada di folder ini. Isi di bawah disusun per topik supaya tinggal dipindahkan ke bagian template yang sesuai. Bagian bertanda **[ISI]** menunggu tautan final.
+> Catatan penulis: template resmi Project Brief belum dibuka untuk akun ini (akses ditolak). Dokumen ini disusun mengikuti rubrik Project Brief; isinya dapat dipindahkan per bagian ke template saat tersedia.
 
 ## Identitas
 - **ID Tim:** DB15-I036 (capstone individu)
@@ -11,15 +11,15 @@
 ## Tautan
 | Item | Tautan |
 |---|---|
-| Aplikasi live (Streamlit) | **[ISI]** |
+| Aplikasi live (Streamlit) | https://firaza-vendor.streamlit.app |
 | Repositori GitHub (MIT) | https://github.com/abidayn/Firaza |
-| Dokumentasi API (Swagger) | **[ISI jika REST API di-deploy]**, atau lokal `http://localhost:8000/docs` |
+| Dokumentasi API (Swagger) | dijalankan lokal di `http://localhost:8000/docs` (perintah di README); tangkapan layar di bagian Screenshot |
 | Video demo fitur AI | **[ISI]** |
 | Video presentasi 10 menit | **[ISI]** |
-| Slide presentasi | **[ISI]** (file: `submission/slides/firaza_pitch.pptx`) |
+| Slide presentasi | https://github.com/abidayn/Firaza/blob/main/submission/slides/firaza_pitch.pptx |
 
 ## Ringkasan eksekutif
-Firaza menjual hampers dan personalized gifts, dengan sekitar 99% penjualan online. Pemilihan vendor material (kardus, pita, packaging, bahan bordir/printing) masih dilakukan owner secara manual memakai spreadsheet dan ingatan. Padahal vendor termurah belum tentu terbaik jika lambat, berkualitas rendah, atau sering terlambat. Proyek ini membangun aplikasi web decision-support yang: (1) menyimpan data vendor, harga, lead time, kualitas, dan histori transaksi; (2) mengurutkan vendor untuk setiap kebutuhan procurement dengan **model ranking LightGBM LambdaRank yang dilatih sendiri**; dan (3) menjelaskan alasan serta trade-off rekomendasi dengan **RAG** (embedding Gemini, vector store ChromaDB, generation Gemini). Keputusan akhir tetap di tangan owner. Pada data uji, model mencapai **NDCG@3 0,933** (target ≥ 0,85), jauh di atas baseline rumus bobot (0,788). RAG mencapai **Recall@3 1,0** dan **faithfulness 1,0**.
+Firaza menjual hampers dan personalized gifts, dengan sekitar 99% penjualan online. Pemilihan vendor material (kardus, pita, packaging, bahan bordir/printing) masih dilakukan owner secara manual memakai spreadsheet dan ingatan. Padahal vendor termurah belum tentu terbaik jika lambat, berkualitas rendah, atau sering terlambat. Proyek ini membangun aplikasi web decision-support yang: (1) menyimpan data vendor, harga, lead time, kualitas, dan histori transaksi; (2) mengurutkan vendor untuk setiap kebutuhan procurement dengan **model ranking LightGBM LambdaRank yang dilatih sendiri**; dan (3) menjelaskan alasan serta trade-off rekomendasi dengan **RAG** (embedding Gemini, vector store ChromaDB, generation Gemini). Keputusan akhir tetap di tangan owner. Pada data uji, model mencapai **NDCG@3 0,933** (target minimal 0,85), jauh di atas baseline rumus bobot (0,788). RAG mencapai **Recall@3 1,0** dan **faithfulness 1,0**.
 
 ## Latar belakang dan masalah (5W+1H)
 - **What:** pemilihan vendor material dilakukan manual tanpa perbandingan multi-atribut yang konsisten.
@@ -97,8 +97,12 @@ Lihat `docs/USER_GUIDE.md` dan video demo. Singkatnya: buka Rekomendasi Vendor, 
 - Belum ada login dan belum ada umpan balik dari pilihan owner untuk melatih ulang model.
 - Langkah berikutnya: memakai data dan keputusan asli owner, menambah fitur tren harga, dan integrasi dengan pencatatan stok (Use Case 1).
 
-## Screenshot (tempel di template)
-1. Halaman Rekomendasi Vendor (tabel + grafik + penjelasan AI) **[ISI]**
-2. Swagger `/docs` **[ISI]**
-3. Tabel metrik (`ml/reports/metrics.md`) atau grafik `submission/slides/chart_ndcg.png` **[ISI]**
-4. Halaman Vendor atau Material & Harga **[ISI]**
+## Screenshot
+
+![Gambar 1. Halaman Rekomendasi Vendor: ranking, grafik, dan penjelasan AI (aplikasi live)](img/rekomendasi.png)
+
+![Gambar 2. Halaman Material & Harga untuk mengelola penawaran vendor (aplikasi live)](img/material_harga.png)
+
+![Gambar 3. Dokumentasi REST API (Swagger): POST /api/v1/recommendations mengembalikan ranking](img/swagger_recommendations.png)
+
+![Gambar 4. NDCG@3 model dibanding baseline pada data uji](../slides/chart_ndcg.png)

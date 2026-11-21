@@ -11,7 +11,7 @@ You enter a need (material, quantity, deadline, priorities) and:
 
 The final decision stays with the owner or staff. **All data is synthetic** (Firaza did not provide data).
 
-- **Live app:** _added after deployment (see [`docs/DEPLOY.md`](docs/DEPLOY.md))_
+- **Live app:** https://firaza-vendor.streamlit.app (Streamlit Community Cloud, ChromaDB vector store, Neon Postgres)
 - **Learning pre-read:** [`docs/PRE_READ.md`](docs/PRE_READ.md) · **Plan:** [`plan.md`](plan.md)
 
 ## Results
