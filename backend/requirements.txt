@@ -1,0 +1,14 @@
+fastapi
+uvicorn[standard]
+sqlalchemy
+pg8000
+pydantic
+pydantic-settings
+python-dotenv
+pandas
+numpy
+scipy
+scikit-learn
+lightgbm
+chromadb
+google-genai

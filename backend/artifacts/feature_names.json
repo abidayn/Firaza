@@ -1,0 +1,19 @@
+[
+  "deadline_days",
+  "log_qty",
+  "w_price",
+  "w_speed",
+  "w_quality",
+  "unit_price_eff",
+  "price_rel_median",
+  "lead_typ",
+  "slack_typ",
+  "lead_p90",
+  "slack_p90",
+  "quality_score",
+  "ontime_rate",
+  "defect_rate",
+  "moq_ratio",
+  "in_stock",
+  "n_tx"
+]

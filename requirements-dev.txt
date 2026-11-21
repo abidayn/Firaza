@@ -1,0 +1,5 @@
+-r backend/requirements.txt
+-r ml/requirements.txt
+-r frontend/requirements.txt
+pytest
+httpx

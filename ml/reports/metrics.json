@@ -1,0 +1,38 @@
+{
+  "lightgbm_lambdarank": {
+    "ndcg@1": 0.9591,
+    "ndcg@3": 0.933,
+    "ndcg@5": 0.9405,
+    "kendall_tau": 0.7433
+  },
+  "baseline_cheapest": {
+    "ndcg@1": 0.7228,
+    "ndcg@3": 0.7326,
+    "ndcg@5": 0.7561,
+    "kendall_tau": 0.4245
+  },
+  "baseline_weighted_sum": {
+    "ndcg@1": 0.8127,
+    "ndcg@3": 0.7882,
+    "ndcg@5": 0.8104,
+    "kendall_tau": 0.5238
+  },
+  "baseline_topsis": {
+    "ndcg@1": 0.7335,
+    "ndcg@3": 0.7179,
+    "ndcg@5": 0.7479,
+    "kendall_tau": 0.4382
+  },
+  "control_shuffled_labels": {
+    "ndcg@1": 0.4373,
+    "ndcg@3": 0.4561,
+    "ndcg@5": 0.4977,
+    "kendall_tau": -0.0133
+  },
+  "ablation_no_slack_features": {
+    "ndcg@1": 0.9633,
+    "ndcg@3": 0.9386,
+    "ndcg@5": 0.9398,
+    "kendall_tau": 0.7444
+  }
+}
