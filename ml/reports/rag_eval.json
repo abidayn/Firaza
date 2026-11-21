@@ -1,0 +1,291 @@
+{
+  "vector_store": "numpy-fallback",
+  "retrieval": {
+    "recall@3": 1.0,
+    "n": 12,
+    "rows": [
+      {
+        "query": "Pesanan harus sampai besok, vendor mana yang aman?",
+        "target": "policy-urgent_orders",
+        "top3": [
+          "policy-urgent_orders",
+          "profile-12",
+          "profile-31"
+        ],
+        "hit": true
+      },
+      {
+        "query": "Beli 2000 kardus sekaligus, bagaimana memilih harga grosir?",
+        "target": "policy-bulk_orders",
+        "top3": [
+          "profile-18",
+          "profile-13",
+          "policy-bulk_orders"
+        ],
+        "hit": true
+      },
+      {
+        "query": "Benang bordir untuk sajadah custom harus bagus, pilih vendor yang mana?",
+        "target": "policy-quality_sensitive_items",
+        "top3": [
+          "policy-quality_sensitive_items",
+          "profile-25",
+          "profile-12"
+        ],
+        "hit": true
+      },
+      {
+        "query": "Vendor ini sering telat kirim, apakah masih boleh dipakai?",
+        "target": "policy-reliability_threshold",
+        "top3": [
+          "policy-reliability_threshold",
+          "policy-urgent_orders",
+          "performance-27"
+        ],
+        "hit": true
+      },
+      {
+        "query": "Ada supplier baru yang belum pernah kita pakai",
+        "target": "policy-new_vendor_trial",
+        "top3": [
+          "policy-new_vendor_trial",
+          "profile-10",
+          "profile-12"
+        ],
+        "hit": true
+      },
+      {
+        "query": "Kalau vendor utama kehabisan stok, apa rencana cadangannya?",
+        "target": "policy-backup_vendor",
+        "top3": [
+          "policy-backup_vendor",
+          "policy-reliability_threshold",
+          "policy-urgent_orders"
+        ],
+        "hit": true
+      },
+      {
+        "query": "Seberapa sering CV Jaya Mulia terlambat mengirim dan berapa tingkat cacatnya?",
+        "target": "performance-1",
+        "top3": [
+          "performance-1",
+          "performance-10",
+          "performance-3"
+        ],
+        "hit": true
+      },
+      {
+        "query": "Material apa saja yang dijual CV Mitra Jaya dan berapa harganya?",
+        "target": "profile-2",
+        "top3": [
+          "profile-2",
+          "profile-1",
+          "profile-3"
+        ],
+        "hit": true
+      },
+      {
+        "query": "Seberapa sering CV Mulia Mitra terlambat mengirim dan berapa tingkat cacatnya?",
+        "target": "performance-3",
+        "top3": [
+          "performance-3",
+          "performance-10",
+          "performance-1"
+        ],
+        "hit": true
+      },
+      {
+        "query": "Material apa saja yang dijual CV Packindo Abadi dan berapa harganya?",
+        "target": "profile-4",
+        "top3": [
+          "profile-5",
+          "profile-4",
+          "profile-11"
+        ],
+        "hit": true
+      },
+      {
+        "query": "Seberapa sering CV Packindo Sentosa terlambat mengirim dan berapa tingkat cacatnya?",
+        "target": "performance-5",
+        "top3": [
+          "performance-5",
+          "performance-4",
+          "performance-11"
+        ],
+        "hit": true
+      },
+      {
+        "query": "Material apa saja yang dijual CV Sentosa Abadi dan berapa harganya?",
+        "target": "profile-6",
+        "top3": [
+          "profile-6",
+          "profile-7",
+          "profile-27"
+        ],
+        "hit": true
+      }
+    ]
+  },
+  "generation": {
+    "n_requests": 20,
+    "n_answered": 18,
+    "faithfulness": 1.0,
+    "mentions_top_vendor": 1.0,
+    "rows": [
+      {
+        "request_id": 7,
+        "status": "llm",
+        "verified": true,
+        "mentions_top_vendor": true,
+        "model": "models/gemini-3.5-flash-lite",
+        "text": "PT Indah Makmur direkomendasikan karena menawarkan harga satuan Rp 6.790 dengan total Rp 339.500 dan lead time 1 hari yang sesuai tenggat, didukung faktor harga, sisa waktu, serta minimum order terbaik.\n\nDibanding alternatif, Toko Berkah Sentosa lebih mahal dengan total Rp 372.000, sedangkan Toko Utama Indah memiliki total lebih murah Rp 302.500 namun berada di bawah MOQ vendor dengan tepat waktu hanya 44%. PT Sentosa Sinar dan UD Utama Prima memiliki total masing-masing Rp 353.500 dan Rp 376.500 dengan tepat waktu lebih rendah.\n\nCatatan untuk PT Indah Makmur adalah tingkat cacat 5.4% dan tepat waktu 92%."
+      },
+      {
+        "request_id": 8,
+        "status": "llm",
+        "verified": true,
+        "mentions_top_vendor": true,
+        "model": "models/gemini-3.5-flash-lite",
+        "text": "Toko Berkah Sentosa direkomendasikan di peringkat pertama karena menawarkan harga satuan termurah Rp 1.170, total Rp 23.400, dan kualitas tertinggi 4.3/5, sejalan dengan prioritas harga 55% dan kualitas 45%. \n\nPeringkat berikutnya adalah CV Mulia Mitra (harga satuan Rp 1.220, total Rp 24.400, kualitas 3.9/5), UD Utama Prima (harga satuan Rp 1.410, total Rp 28.200, kualitas 3.8/5), UD Abadi Sentosa (harga satuan Rp 1.230, total Rp 24.600, kualitas 3.3/5), dan CV Jaya Mulia (harga satuan Rp 1.280, total Rp 25.600, kualitas 3.5/5). Alternatif lain lebih mahal atau memiliki kualitas lebih rendah, serta UD Abadi Sentosa dan CV Jaya Mulia memiliki catatan pesanan di bawah MOQ vendor. \n\nCatatan risiko untuk Toko Berkah Sentosa adalah tingkat cacat 5.5% dan tepat waktu 88%."
+      },
+      {
+        "request_id": 9,
+        "status": "llm_unavailable",
+        "error": "models/gemini-3.5-flash-lite: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand ; models/gemini-3.8-flash: 504 DEADLINE_EXCEEDED. "
+      },
+      {
+        "request_id": 10,
+        "status": "llm",
+        "verified": true,
+        "mentions_top_vendor": true,
+        "model": "models/gemini-3.5-flash-lite",
+        "text": "UD Utama Mulia direkomendasikan karena menyeimbangkan bobot kualitas tinggi (60%) dan harga (36%) dengan harga total Rp 25.500, lead time 1 hari, kualitas 3.8/5, dan tepat waktu 96%. Vendor alternatif seperti Toko Utama Indah menawarkan total Rp 25.000 dengan lead time 3 hari, kualitas lebih rendah 3.2/5, dan tepat waktu 58%. CV Mulia Mitra menawarkan total Rp 28.500 dengan kualitas 4.0/5 dan tepat waktu 80%. UD Utama Prima menawarkan total Rp 30.500 dengan kualitas 4.2/5 dan tepat waktu 66%. PT Indah Makmur menawarkan total Rp 31.500 dengan kualitas 3.4/5 dan tepat waktu 78%. Trade-offnya, UD Utama Mulia lebih mahal Rp 500 dibanding vendor termurah. Catatan risikonya, terdapat tingkat cacat 6.5%."
+      },
+      {
+        "request_id": 11,
+        "status": "llm",
+        "verified": true,
+        "mentions_top_vendor": true,
+        "model": "models/gemini-3.5-flash-lite",
+        "text": "Toko Prima Lestari direkomendasikan di posisi pertama karena memiliki kualitas tertinggi 4.8/5 dan tepat waktu 94%, sangat sesuai bobot prioritas kualitas 62%. CV Packindo Abadi berada di urutan kedua dengan harga satuan lebih murah Rp 3.390 dan total Rp 67.800, tetapi kualitasnya lebih rendah 3.6/5. CV Jaya Mulia menyusul dengan harga total Rp 67.600 dan kualitas 3.7/5. UD Utama Prima di posisi keempat menawarkan total Rp 67.400 dengan lead time 3 hari. PT Prima Jaya di urutan kelima memiliki total Rp 68.800 dan kualitas terendah 3.5/5. Trade-offnya, Toko Prima Lestari lebih mahal Rp 13.000 (23%) dibanding vendor termurah UD Utama Mulia. Catatan risikonya, Toko Prima Lestari memiliki tingkat cacat 4.4%."
+      },
+      {
+        "request_id": 12,
+        "status": "llm",
+        "verified": true,
+        "mentions_top_vendor": true,
+        "model": "models/gemini-3.5-flash-lite",
+        "text": "PT Prima Sinar direkomendasikan karena harga kompetitif dan lead time 1 hari, memenuhi bobot prioritas harga dan kecepatan. Alternatif UD Utama Mulia dan Toko Utama Indah menawarkan harga berbeda namun memiliki lead time lebih lambat atau kualitas lebih rendah. Toko Berkah Sentosa dan PT Mulia Prima lebih mahal. Catatannya, PT Prima Sinar memiliki kualitas 3.2/5, tepat waktu 69%, dan cacat 7.6%."
+      },
+      {
+        "request_id": 13,
+        "status": "llm",
+        "verified": true,
+        "mentions_top_vendor": true,
+        "model": "models/gemini-3.5-flash-lite",
+        "text": "Toko Prima Lestari direkomendasikan di posisi #1 karena menawarkan kualitas terbaik 4.3/5, lead time 1 hari, tingkat cacat 3.3%, serta faktor terkuat pada tingkat cacat dan sisa waktu yang menaikkan skor. \n\nTrade-off dibanding alternatif: CV Sinar Kemasan di posisi #2 menawarkan harga lebih murah dengan total Rp 184.400, namun kualitasnya lebih rendah yaitu 3.4/5 dan cacat lebih tinggi 7.1%. UD Abadi Sinar di posisi #3 memiliki tepat waktu lebih tinggi 91%, tetapi harganya lebih mahal dengan total Rp 203.200. CV Packindo Sentosa di posisi #4 memiliki total Rp 193.600 dengan cacat 6.6%. PT Prima Jaya di posisi #5 memiliki tepat waktu terendah 54% dan cacat tertinggi 7.6%. \n\nSatu risiko atau catatan: Toko Prima Lestari lebih mahal Rp 15.200 dibanding vendor termurah PT Mulia Prima."
+      },
+      {
+        "request_id": 14,
+        "status": "llm",
+        "verified": true,
+        "mentions_top_vendor": true,
+        "model": "models/gemini-3.5-flash-lite",
+        "text": "UD Utama Mulia direkomendasikan karena menawarkan harga satuan Rp 730 dan total Rp 73.000 dengan lead time 1 hari, tepat waktu 81%, dan kualitas 3.6/5, memenuhi tenggat ketat. PT Indah Makmur menyusul di posisi kedua dengan total Rp 79.000, kualitas 3.8/5, tepat waktu 74%, dan cacat 6.3%. UD Indah Mulia di peringkat ketiga menawarkan kualitas lebih tinggi 4.5/5 dan cacat 0.8%, namun total lebih mahal Rp 85.000. CV Mitra Jaya berada di posisi keempat dengan total Rp 91.000 dan tepat waktu 87%. Toko Utama Indah menempati posisi terakhir karena lead time 3 hari melewati tenggat, meski total termurah Rp 59.000. Catatan risikonya adalah UD Utama Mulia memiliki tingkat cacat 6.1%."
+      },
+      {
+        "request_id": 15,
+        "status": "llm",
+        "verified": true,
+        "mentions_top_vendor": true,
+        "model": "models/gemini-3.5-flash-lite",
+        "text": "PT Mulia Prima direkomendasikan karena merupakan vendor termurah dengan harga satuan Rp 7.610 dan total Rp 6.088.000, serta memiliki lead time 1 hari yang sesuai tenggat. Pilihan berikutnya adalah Toko Prima Lestari, CV Sinar Kemasan, CV Packindo Sentosa, hingga Toko Indah Mulia di urutan terakhir karena memiliki lead time 2 hari sehingga melewati tenggat 1 hari. Trade-off utamanya, Toko Prima Lestari dan CV Sinar Kemasan menawarkan tepat waktu lebih tinggi yaitu 73% dan 74%, tetapi dengan harga lebih mahal masing-masing total Rp 6.536.000 dan Rp 6.552.000. Risiko untuk rekomendasi utama PT Mulia Prima adalah tingkat tepat waktu yang hanya 62% dan cacat 4.5%."
+      },
+      {
+        "request_id": 16,
+        "status": "llm",
+        "verified": true,
+        "mentions_top_vendor": true,
+        "model": "models/gemini-3.5-flash-lite",
+        "text": "PT Mulia Prima direkomendasikan di urutan pertama karena menawarkan harga satuan Rp 14.200 dan total Rp 1.420.000, menjadikannya vendor termurah dengan skor harga tertinggi dan MOQ yang mendukung.\n\nTrade-off dibanding alternatif seperti Toko Mitra Packindo, CV Sinar Kemasan, Toko Indah Mulia, dan PT Prima Berkah adalah PT Mulia Prima memiliki harga lebih murah, namun semua vendor di daftar ini memiliki lead time 4 sampai 7 hari yang melewati tenggat 1 hari. \n\nCatatan risikonya, PT Mulia Prima memiliki lead time 4 hari dan tepat waktu 55% dengan cacat 4.5%, serta melewati tenggat."
+      },
+      {
+        "request_id": 17,
+        "status": "llm",
+        "verified": true,
+        "mentions_top_vendor": true,
+        "model": "models/gemini-3.5-flash-lite",
+        "text": "UD Utama Mulia direkomendasikan karena memiliki lead time tercepat 1 hari, harga total Rp 264.500, kualitas 4.0/5, tepat waktu 89%, dan cacat 6.7%, sangat cocok dengan bobot kualitas 68% dan tenggat 5 hari. Urutan berikutnya adalah UD Indah Mulia (total Rp 328.500, lead time 2 hari, kualitas 4.5/5), PT Prima Sinar (total Rp 264.000, kualitas 2.9/5), Toko Indah Utama (total Rp 340.500, kualitas 4.5/5), dan Toko Berkah Sentosa (total Rp 300.000, kualitas 4.1/5). Trade-off utama: PT Prima Sinar lebih murah Rp 500 tetapi kualitasnya jauh lebih rendah yaitu 2.9/5. Catatan risikonya, UD Utama Mulia memiliki tingkat cacat 6.7% yang perlu diwaspadai agar tidak menurunkan kesan premium produk."
+      },
+      {
+        "request_id": 18,
+        "status": "llm",
+        "verified": true,
+        "mentions_top_vendor": true,
+        "model": "models/gemini-3.5-flash-lite",
+        "text": "PT Indah Makmur direkomendasikan di posisi pertama karena menawarkan harga termurah yaitu harga satuan Rp 1.150 dan total Rp 57.500 dengan lead time 1 hari yang memenuhi tenggat, didukung faktor harga dan sisa waktu terbaik. Dibandingkan alternatif seperti PT Prima Sinar dengan total Rp 61.000, Toko Berkah Sentosa Rp 69.000, PT Packindo Mulia Rp 76.500, dan Toko Indah Utama yang melewati tenggat dengan lead time 2 hari, PT Indah Makmur unggul dalam kecepatan dan biaya. Catatan risikonya adalah kualitas 3.6/5 dan tingkat cacat 7.7%, lebih tinggi dibanding Toko Berkah Sentosa yang memiliki kualitas 4.1/5 dan cacat 4.6%."
+      },
+      {
+        "request_id": 19,
+        "status": "llm",
+        "verified": true,
+        "mentions_top_vendor": true,
+        "model": "models/gemini-3.5-flash-lite",
+        "text": "UD Utama Mulia direkomendasikan karena menawarkan harga termurah Rp 170.000 (harga satuan Rp 1.700) dengan lead time 2 hari, memenuhi tenggat 3 hari serta bobot harga dan kecepatan. Posisi berikutnya adalah PT Mulia Prima total Rp 199.000 dengan lead time 1 hari dan kualitas 4.2/5, lalu UD Utama Prima total Rp 218.000 dengan lead time 2 hari dan tepat waktu 89%, kemudian PT Prima Berkah total Rp 253.000 dengan kualitas tertinggi 4.9/5 dan cacat 1.1%, serta Toko Mitra Packindo total Rp 220.000 dengan tepat waktu 97%. PT Mulia Prima lebih cepat tetapi lebih mahal. Catatan risikonya, UD Utama Mulia memiliki tingkat cacat 6.9% dan tepat waktu 81%."
+      },
+      {
+        "request_id": 20,
+        "status": "llm_unavailable",
+        "error": "models/gemini-3.5-flash-lite: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand ; models/gemini-3.8-flash: 504 DEADLINE_EXCEEDED. "
+      },
+      {
+        "request_id": 21,
+        "status": "llm",
+        "verified": true,
+        "mentions_top_vendor": true,
+        "model": "models/gemini-3.5-flash-lite",
+        "text": "Rekomendasi utama jatuh pada UD Utama Mulia karena menawarkan harga satuan termurah Rp 1.700 dengan total Rp 1.360.000, serta lead time 2 hari yang memenuhi tenggat 7 hari. Faktor harga memiliki bobot tertinggi 50% dan vendor ini sekaligus vendor termurah. Urutan berikutnya adalah PT Mulia Prima, CV Mulia Mitra, UD Karya Mitra, hingga UD Utama Prima, yang memiliki harga semakin mahal berturut-turut Rp 1.990, Rp 2.030, Rp 2.100, dan Rp 2.180.\n\nTrade-off dibanding alternatif: Alternatif seperti PT Mulia Prima dan CV Mulia Mitra memberikan lead time lebih cepat 1 hari dan kualitas lebih tinggi, tetapi harganya jauh lebih mahal hingga total Rp 1.624.000.\n\nRisiko atau catatan: UD Utama Mulia memiliki tingkat cacat 6.9%."
+      },
+      {
+        "request_id": 22,
+        "status": "llm",
+        "verified": true,
+        "mentions_top_vendor": true,
+        "model": "models/gemini-3.5-flash-lite",
+        "text": "Toko Utama Indah direkomendasikan karena merupakan vendor termurah dengan harga satuan Rp 680 dan total Rp 13.600, serta memenuhi MOQ 20 dengan lead time 3 hari yang sesuai tenggat 5 hari. \n\nDibanding alternatif seperti PT Prima Sinar (total Rp 14.400, stok kosong), Toko Mitra Packindo (total Rp 16.600), UD Utama Mulia (total Rp 14.600, di bawah MOQ), dan CV Packindo Abadi (total Rp 18.400), vendor ini unggul dalam efisiensi biaya. \n\nRisikonya, Toko Utama Indah memiliki tingkat tepat waktu 51% dan tingkat cacat 8.1%, serta kualitas 3.5/5. Alternatif lain seperti Toko Mitra Packindo menawarkan kualitas 3.6/5 dan tepat waktu 96% dengan harga lebih tinggi."
+      },
+      {
+        "request_id": 23,
+        "status": "llm",
+        "verified": true,
+        "mentions_top_vendor": true,
+        "model": "models/gemini-3.5-flash-lite",
+        "text": "PT Indah Makmur direkomendasikan karena memiliki harga satuan Rp 1.150, total Rp 920.000, lead time 1 hari, kualitas 3.6/5, tepat waktu 73%, dan cacat 7.7%. Vendor ini dipilih karena faktor harga dibanding vendor lain, minimum order, dan sisa waktu terhadap tenggat, serta unggul dari PT Prima Sinar yang berharga Rp 1.080 dengan total Rp 864.000, lead time 1 hari, kualitas 3.2/5, tepat waktu 88%, dan cacat 8.3%, di mana PT Indah Makmur lebih mahal Rp 56.000 (6%) dibanding vendor termurah PT Prima Sinar. Catatannya adalah tepat waktu vendor ini adalah 73% dengan tingkat cacat 7.7% dan histori terlambat rata-rata 3.2 hari."
+      },
+      {
+        "request_id": 24,
+        "status": "llm",
+        "verified": true,
+        "mentions_top_vendor": true,
+        "model": "models/gemini-3.5-flash-lite",
+        "text": "UD Indah Mulia direkomendasikan di posisi nomor 1 karena memiliki kualitas tertinggi 4.6/5, tingkat cacat terendah 1.5%, dan lead time 3 hari yang memenuhi tenggat. Toko Sejahtera Packindo ada di nomor 2 dengan harga Rp 20.950 dan kualitas 3.6/5. PT Packindo Mulia di nomor 3 dengan harga Rp 21.610 dan kualitas 4.1/5. PT Prima Berkah di nomor 4 memiliki lead time 4 hari yang melewati tenggat. UD Karya Mitra di nomor 5 memiliki stok kosong. Trade-offnya, UD Indah Mulia lebih mahal Rp 289.000 dibanding vendor termurah PT Mulia Prima. Risiko catatannya adalah ketepatan waktu UD Indah Mulia sebesar 78% dengan tingkat cacat 1.5%."
+      },
+      {
+        "request_id": 25,
+        "status": "llm",
+        "verified": true,
+        "mentions_top_vendor": true,
+        "model": "models/gemini-3.5-flash-lite",
+        "text": "UD Indah Mulia direkomendasikan karena memiliki kualitas tertinggi 4.9/5 dan tingkat cacat terendah 1.6%, sangat penting untuk material kertas kado sesuai bobot prioritas kecepatan dan kualitas, serta lead time 1 hari. \n\nDibanding alternatif, PT Indah Makmur menawarkan harga lebih murah Rp 115.000 dengan harga satuan Rp 1.150, namun kualitasnya jauh lebih rendah yaitu 3.6/5 dan tingkat cacat tinggi 7.7%. Alternatif lain seperti Toko Berkah Sentosa total Rp 138.000 dengan kualitas 4.1/5, PT Packindo Mulia total Rp 153.000 dengan kualitas 4.1/5, dan PT Prima Sinar total Rp 122.000 dengan kualitas 3.2/5. \n\nCatatan risikonya, UD Indah Mulia lebih mahal Rp 44.000 (38%) dibanding vendor termurah PT Indah Makmur."
+      },
+      {
+        "request_id": 26,
+        "status": "llm",
+        "verified": true,
+        "mentions_top_vendor": true,
+        "model": "models/gemini-3.5-flash-lite",
+        "text": "UD Utama Mulia direkomendasikan di peringkat pertama karena menawarkan harga satuan Rp 1.700 dan total Rp 1.360.000 yang paling murah, sesuai bobot prioritas harga 68%. Lead time 2 hari memenuhi tenggat 7 hari.\n\nAlternatif berikutnya seperti PT Mulia Prima menawarkan harga satuan Rp 1.990 dan total Rp 1.592.000 dengan lead time 1 hari dan kualitas 4.2/5, namun lebih mahal. Urutan berikutnya diikuti oleh CV Mulia Mitra, UD Karya Mitra, hingga UD Utama Prima dengan harga yang semakin tinggi mencapai total Rp 1.744.000.\n\nCatatan risikonya, UD Utama Mulia memiliki tingkat cacat 6.9% dan tepat waktu 81%, sehingga kualitas dan ketepatan waktu perlu dipantau."
+      }
+    ]
+  }
+}

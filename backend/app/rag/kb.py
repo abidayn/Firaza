@@ -26,7 +26,9 @@ def build_documents(db: Session) -> list[dict]:
     tx = clean_transactions(pd.read_sql(select(models.Transaction), db.connection()))
     if not tx.empty:
         tx["ordered_at"] = pd.to_datetime(tx["ordered_at"])
-    six_months_ago = pd.Timestamp(date.today() - timedelta(days=182))
+    # anchor "recent" to the latest recorded order (not today) so document text, and its cached embedding, is stable
+    latest = tx["ordered_at"].max() if not tx.empty else pd.Timestamp(date.today())
+    six_months_ago = latest - timedelta(days=182)
 
     docs = []
     for v in vendors.itertuples():
