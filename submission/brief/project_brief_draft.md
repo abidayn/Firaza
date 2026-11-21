@@ -14,7 +14,7 @@
 | Aplikasi live (Streamlit) | https://firaza-vendor.streamlit.app |
 | Repositori GitHub (MIT) | https://github.com/abidayn/Firaza |
 | Dokumentasi API (Swagger) | dijalankan lokal di `http://localhost:8000/docs` (perintah di README); tangkapan layar di bagian Screenshot |
-| Video demo fitur AI | **[ISI]** |
+| Video demo fitur AI | https://github.com/abidayn/Firaza/blob/main/submission/videos/demo_fitur_ai.mp4 |
 | Video presentasi 10 menit | **[ISI]** |
 | Slide presentasi | https://github.com/abidayn/Firaza/blob/main/submission/slides/firaza_pitch.pptx |
 
@@ -95,9 +95,12 @@ Lihat `docs/USER_GUIDE.md` dan video demo. Singkatnya: buka Rekomendasi Vendor, 
 ## Keterbatasan dan pengembangan lanjut
 - Data sintetis: metrik membuktikan pipeline bekerja, bukan akurasi pada keputusan nyata Firaza.
 - Belum ada login dan belum ada umpan balik dari pilihan owner untuk melatih ulang model.
+- Kasus tepi: jika tidak ada vendor yang bisa memenuhi tenggat (misalnya kotak hampers premium dalam 1 hari), urutan lebih dipengaruhi harga sehingga vendor dengan ketepatan waktu rendah bisa berada di atas. Aplikasi tetap menandai semua vendor 'melewati tenggat' agar pengguna sadar risikonya.
 - Langkah berikutnya: memakai data dan keputusan asli owner, menambah fitur tren harga, dan integrasi dengan pencatatan stok (Use Case 1).
 
 ## Screenshot
+
+![Gambar 0. Beranda aplikasi live: model siap, Gemini aktif, vector store ChromaDB, data di Neon](img/beranda.png)
 
 ![Gambar 1. Halaman Rekomendasi Vendor: ranking, grafik, dan penjelasan AI (aplikasi live)](img/rekomendasi.png)
 
@@ -106,3 +109,6 @@ Lihat `docs/USER_GUIDE.md` dan video demo. Singkatnya: buka Rekomendasi Vendor, 
 ![Gambar 3. Dokumentasi REST API (Swagger): POST /api/v1/recommendations mengembalikan ranking](img/swagger_recommendations.png)
 
 ![Gambar 4. NDCG@3 model dibanding baseline pada data uji](../slides/chart_ndcg.png)
+
+## Pengujian end-to-end
+Sepuluh skenario diuji terhadap database produksi (Neon) dengan kode yang sama dengan aplikasi live, termasuk panggilan Gemini asli: semua lulus (urutan benar, penanda tenggat benar, penjelasan dari LLM). Tiga kasus error (material tidak ada, semua bobot nol, menghapus vendor yang masih dipakai) ditolak dengan pesan yang jelas. Detail: `docs/E2E_TEST.md`.

@@ -151,11 +151,8 @@ text(s, 0.6, 4.6, 12, 2, ["Teks AI hanya boleh memakai angka dari konteks; jika 
                           "Pengguna tidak pernah melihat angka karangan."], 18)
 
 # 9 demo
-s = slide("Demo aplikasi", "e. Hasil akhir")
-ph = s.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, Inches(0.6), Inches(1.7), Inches(12.1), Inches(5.0))
-ph.fill.solid(); ph.fill.fore_color.rgb = LIGHT; ph.line.color.rgb = PURPLE
-text(s, 1.0, 3.6, 11.3, 1.2, "[Tempel screenshot halaman Rekomendasi Vendor di sini, lalu demo live saat presentasi]", 20,
-     False, GRAY)
+s = slide("Demo aplikasi: firaza-vendor.streamlit.app", "e. Hasil akhir")
+image(s, ROOT / "submission" / "videos" / "frames" / "04_penjelasan.png", 0.9, 1.55, h=5.3)
 
 # 10 documentation & usage
 s = slide("Dokumentasi & cara pakai", "f. Dokumentasi")

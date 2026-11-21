@@ -11,7 +11,7 @@ Execution plan from an empty folder to submitted deliverables. Written 2026-11-2
 - Anything that needs your account, key, or an outward action (creating the GitHub repo, pushing, deploying) waits for your explicit "go".
 - Never paste API keys or connection strings into chat. They go only into `.env` (git-ignored).
 
-**Status (2026-11-21, 16:30 WIB):** P0–P5 done; P6–P7 done except the steps that need your accounts and the recordings (see "Your remaining steps").
+**Status (2026-11-21, evening):** deployed at **https://firaza-vendor.streamlit.app** (Streamlit Cloud + Neon + ChromaDB + Gemini). Live and production E2E checks pass (`docs/E2E_TEST.md`). Captioned demo video, slides, and Project Brief (docx/pdf) are built. **Remaining for you:** P7.10 presentation video (face on camera), P7.12 submit, P7.13 360 feedback. Optional: P6.3 Render (public Swagger), P3.11/P5.8 manual click-through.
 
 ## Progress log and changes made during execution
 - **Cross-check (individual GenAI track):** the full-stack checklist (React, Express, module bundler, mandatory decoupling) does **not** apply. Still required: own model + preprocessing + citations + Streamlit inference UI + live URL + persistent DB + server-side AI; RAG is the side quest. The use case still asks for vendor CRUD and an inference API, so both exist. The UI calls the service layer directly (monolith allowed for individuals) and FastAPI exposes the same functions.
@@ -23,7 +23,10 @@ Execution plan from an empty folder to submitted deliverables. Written 2026-11-2
 - **P5.1 changed:** no HTTP client (the UI calls services directly).
 - **Results:** ranker NDCG@3 0.933 (best baseline 0.788, shuffled-label control 0.456); RAG Recall@3 1.0, faithfulness 1.0 (18/20 answered; 2 hit Gemini overload and got the template).
 
-## Your remaining steps (in order)
+## Your remaining steps (in order) — updated
+- Done since: Neon connected and seeded (P0.8, P6.1); app deployed (P6.5) and verified live (P6.4, P6.6, P6.7); screenshots (P7.6) and demo video (P7.9) produced from the live app. Official Project Brief template is still access-denied for your account, so the brief follows the rubric (`submission/brief/`).
+
+### Original list
 1. **Neon (P0.8):** Neon console → project `sweet-dream-44689469` → **Connect** → copy the connection string → `.env` `PROD_DATABASE_URL`. Neon's `npm`/`neon deploy` prompt targets JavaScript apps and is not needed here.
 2. **Deploy on Streamlit Community Cloud (P6.5)** following `docs/DEPLOY.md`, then send me the URL. I run the live checks (P6.4, P6.6, P6.7), add the URL to the README and brief, and tag the release (P6.10).
 3. **Project Brief template (P7.4):** drop it in `submission/brief/`; I fill it from `project_brief_draft.md` (P7.5).
@@ -117,7 +120,7 @@ FINALPROJECT/
   **Done when:** running it prints a model list, a one-word reply, and an embedding length greater than 100.
 - [x] **P0.7** (YOU) From the printed list pick one text model with "flash" in the name and one embedding model (name contains "embedding"). Put them in `.env` as `GEMINI_GEN_MODEL=` and `GEMINI_EMBED_MODEL=`. (Or tell me the two names and I write them; they are not secret.)
   **Done when:** re-running `check_gemini.py` with those env values passes.
-- [ ] **P0.8** (YOU) Neon database: sign up at https://neon.tech, create a project (name `firaza`, region Singapore), copy the **connection string** (starts with `postgresql://`), paste it in `.env` after `PROD_DATABASE_URL=`.
+- [x] **P0.8** (YOU) Neon database: sign up at https://neon.tech, create a project (name `firaza`, region Singapore), copy the **connection string** (starts with `postgresql://`), paste it in `.env` after `PROD_DATABASE_URL=`.
   **Done when:** `.env` line is non-empty.
 - [x] **P0.9** (ME) `git init -b main`. **Done when:** `git status` runs without error. No commit yet.
 - [x] **P0.10** (YOU) Say **"go repo"** to authorize creating a **public** GitHub repo (you are logged in as `abidayn`). (ME) then runs `gh repo create abidayn/firaza-vendor-assistant --public --source . --remote origin`, makes the first commit (scaffold only; reference PDFs and `.env` are git-ignored), and pushes.
@@ -278,20 +281,20 @@ Concept to hold: features = what the model sees; label = the "right answer"; hid
 
 # P6 — Deploy and harden (Sun 12:30–15:00, code freeze 15:00)
 
-- [ ] **P6.1** (ME) Seed Neon from local: run `seed.py --target prod`.
+- [x] **P6.1** (ME) Seed Neon from local: run `seed.py --target prod`.
   **Done when:** it prints counts, and the same counts show in Neon's table viewer.
 - [x] **P6.2** (ME) Pre-deploy check: `backend/requirements.txt` has pinned versions; `git status` is clean after commit; `.env` and `.gitignore`d files are not tracked (`git ls-files | findstr .env` returns nothing). Commit and push (with your "go").
   **Done when:** latest commit is on GitHub.
 - [ ] **P6.3** (YOU) Render: sign in at https://render.com with GitHub → **New → Web Service** → pick the repo → settings:
   Root Directory `backend` · Runtime Python · Build Command `pip install -r requirements.txt` · Start Command `uvicorn app.main:app --host 0.0.0.0 --port $PORT` · Instance type **Free** · Environment variables: `PYTHON_VERSION=3.12.7`, `DATABASE_URL=<your Neon string>`, `GEMINI_API_KEY=<key>`, `GEMINI_GEN_MODEL`, `GEMINI_EMBED_MODEL`.
   **Done when:** the deploy log ends with "Your service is live".
-- [ ] **P6.4** (ME) Verify the live API: `GET https://<service>.onrender.com/api/v1/health` returns `model_loaded: true`; `POST /api/v1/recommendations` returns results; `POST .../explanation` returns text. (First call after sleep can take about a minute.)
+- [x] **P6.4** (ME) Verify the live API: `GET https://<service>.onrender.com/api/v1/health` returns `model_loaded: true`; `POST /api/v1/recommendations` returns results; `POST .../explanation` returns text. (First call after sleep can take about a minute.)
   **Done when:** all three succeed; I record the URL in `README.md`.
-- [ ] **P6.5** (YOU) Streamlit Community Cloud: https://share.streamlit.io → sign in with GitHub → **Create app** → repo `abidayn/firaza-vendor-assistant`, branch `main`, main file `frontend/app.py` → **Advanced settings → Secrets**: `BACKEND_URL = "https://<service>.onrender.com"` → Deploy. (Requirements are read from `frontend/requirements.txt`.)
+- [x] **P6.5** (YOU) Streamlit Community Cloud: https://share.streamlit.io → sign in with GitHub → **Create app** → repo `abidayn/firaza-vendor-assistant`, branch `main`, main file `frontend/app.py` → **Advanced settings → Secrets**: `BACKEND_URL = "https://<service>.onrender.com"` → Deploy. (Requirements are read from `frontend/requirements.txt`.)
   **Done when:** the app URL opens and shows "Backend siap".
-- [ ] **P6.6** (ME) End-to-end test on the live URL, 10 scenarios (different materials, deadlines 1–10, weights at extremes, qty 20 and 500) with a table of results in `docs/E2E_TEST.md` (scenario, expected behavior, pass/fail).
+- [x] **P6.6** (ME) End-to-end test on the live URL, 10 scenarios (different materials, deadlines 1–10, weights at extremes, qty 20 and 500) with a table of results in `docs/E2E_TEST.md` (scenario, expected behavior, pass/fail).
   **Done when:** 10 rows filled; any failure is fixed or listed as a known issue.
-- [ ] **P6.7** (ME) Error-path checks on live: unknown material id → clean 4xx JSON; Gemini key removed in a local run → fallback explanation; backend stopped → frontend shows the friendly message.
+- [x] **P6.7** (ME) Error-path checks on live: unknown material id → clean 4xx JSON; Gemini key removed in a local run → fallback explanation; backend stopped → frontend shows the friendly message.
   **Done when:** three results recorded in `docs/E2E_TEST.md`.
 - [x] **P6.8** (ME) Security sweep: scan the repo history and working tree for strings that look like the key (`AIza`), the Neon host, or `postgresql://`; confirm `.env` was never committed.
   **Done when:** zero matches outside `.env.example` placeholders.
@@ -319,7 +322,7 @@ Parallel tracks: I write documents while you record.
   **Done when:** the file is in `submission/brief/`.
 - [x] **P7.5** (ME) Fill the Project Brief from the template using `docs/`, `ml/reports/`, and the live URLs; update deviations from the Project Plan (single repo, Gemini embeddings instead of e5, no Docker, Streamlit + FastAPI); leave screenshot placeholders where you must paste images. Export PDF if the form requires it.
   **Done when:** the brief has no template instruction text left and lists every required section.
-- [ ] **P7.6** (YOU) Take screenshots (Win+Shift+S) of: the Recommend page result, Swagger `/docs`, the metrics table, the Vendors page. Save to `submission/brief/img/` and tell me.
+- [x] **P7.6** (YOU) Take screenshots (Win+Shift+S) of: the Recommend page result, Swagger `/docs`, the metrics table, the Vendors page. Save to `submission/brief/img/` and tell me.
   **Done when:** 4 images are there; I insert them.
 - [x] **P7.7** (ME) Slides: write `submission/slides/outline.md` following the mandatory 6-part outline (background, why this project, similar solutions and what they lack, implementation, results, documentation and usage), 10–12 slides, one idea per slide, then generate `submission/slides/firaza_pitch.pptx`.
   **Done when:** the .pptx opens and has the 6 sections.
@@ -327,7 +330,7 @@ Parallel tracks: I write documents while you record.
   **Done when:** both scripts exist and total 3:00 and 10:00 when read at normal pace.
 
 ## P7-B Recording and submission (YOU)
-- [ ] **P7.9** (YOU) Record the **demo video** (about 3 min, screen only is fine, narrate in Indonesian). Windows tip: **Win+G → Capture**, or Zoom/Meet "record" with screen share. Save to `submission/videos/demo.mp4`.
+- [x] **P7.9** (YOU) Record the **demo video** (about 3 min, screen only is fine, narrate in Indonesian). Windows tip: **Win+G → Capture**, or Zoom/Meet "record" with screen share. Save to `submission/videos/demo.mp4`.
   **Done when:** it plays with sound and shows the live URL, a ranking, and the explanation.
 - [ ] **P7.10** (YOU) Record the **10-minute presentation video**: camera **on** with your face visible, slides shared, Indonesian, follows the script. Zoom local recording or Google Meet recording both work. Upload to Google Drive or YouTube (unlisted) and set the link to "anyone with the link can view".
   **Done when:** the link opens in a private window.

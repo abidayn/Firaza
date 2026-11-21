@@ -25,8 +25,8 @@
 | Requirement | Evidence | Status |
 |---|---|---|
 | Web tech, dynamic output from user input | Streamlit app | ✅ |
-| Live URL (not localhost) | Streamlit Cloud (see `docs/DEPLOY.md`) | ⏳ deploy |
-| Data persisted in a real database | Neon Postgres via `DATABASE_URL` | ⏳ paste Neon string |
+| Live URL (not localhost) | https://firaza-vendor.streamlit.app | ✅ |
+| Data persisted in a real database | Neon Postgres (verified from the live app and `docs/E2E_TEST.md`) | ✅ |
 | AI feature contextual, integrated server-side (key safe) | `backend/app/rag/`, keys in env/secrets; repo scanned clean | ✅ |
 | Errors handled without crashing | global API error handler, UI messages, template fallback; 14 tests | ✅ |
 | REST API with interactive docs (use case: inference API) | FastAPI `/docs` (local) | ✅ (➖ public deploy on Render) |
@@ -49,9 +49,9 @@
 ## Final deliverables
 | Item | File / link | Status |
 |---|---|---|
-| Project Brief (official template) | draft content: `submission/brief/project_brief_draft.md` | ⏳ template + links + screenshots |
-| Usage guide or demo video | `docs/USER_GUIDE.md`; script `submission/videos/demo_script.md` | ⏳ record demo |
-| Slides (6-part outline) | `submission/slides/firaza_pitch.pptx` | ✅ (add 1 screenshot on slide 9) |
+| Project Brief | `submission/brief/Project Brief - DB15-I036.pdf` (+ .docx); official template not accessible yet | ✅ (add presentation video link) |
+| Usage guide or demo video | `docs/USER_GUIDE.md` and `submission/videos/demo_fitur_ai.mp4` (captioned, from the live app) | ✅ |
+| Slides (6-part outline) | `submission/slides/firaza_pitch.pptx` | ✅ |
 | 10-minute presentation video, face on camera, Indonesian | script `submission/videos/presentation_script.md` | ⏳ record + upload |
 | Submit the form before 22 Nov 23:59 WIB | — | ⏳ |
 | 360 feedback (20–24 Nov) | — | ⏳ |

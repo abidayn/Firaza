@@ -1,0 +1,151 @@
+{
+ "scenarios": [
+  [
+   "Kardus kecil, standar",
+   "Kardus 30x20x15 cm",
+   100,
+   3,
+   17,
+   "PT Prima Sinar",
+   1,
+   false,
+   "llm",
+   5.0,
+   true
+  ],
+  [
+   "Kardus besar, partai besar, prioritas harga",
+   "Kardus 40x30x20 cm",
+   500,
+   7,
+   12,
+   "UD Utama Mulia",
+   1,
+   false,
+   "llm",
+   2.5,
+   true
+  ],
+  [
+   "Pita satin, mendesak 1 hari",
+   "Pita satin 2 cm",
+   50,
+   1,
+   18,
+   "UD Indah Mulia",
+   1,
+   false,
+   "llm",
+   2.4,
+   true
+  ],
+  [
+   "Pita grosgrain, kualitas utama",
+   "Pita grosgrain",
+   100,
+   5,
+   5,
+   "Toko Berkah Sentosa",
+   2,
+   false,
+   "llm",
+   3.0,
+   true
+  ],
+  [
+   "Bubble wrap, seimbang",
+   "Plastik bubble wrap",
+   200,
+   3,
+   14,
+   "UD Utama Mulia",
+   2,
+   false,
+   "llm",
+   4.2,
+   true
+  ],
+  [
+   "Polymailer, jumlah kecil (uji MOQ)",
+   "Polymailer 25x35 cm",
+   20,
+   5,
+   18,
+   "Toko Utama Indah",
+   3,
+   false,
+   "llm",
+   13.1,
+   true
+  ],
+  [
+   "Kotak hampers premium, mendesak",
+   "Kotak hampers premium",
+   50,
+   2,
+   17,
+   "PT Mulia Prima",
+   4,
+   true,
+   "llm",
+   2.9,
+   true
+  ],
+  [
+   "Benang bordir, kualitas",
+   "Benang bordir",
+   100,
+   10,
+   19,
+   "UD Utama Mulia",
+   1,
+   false,
+   "llm",
+   2.9,
+   true
+  ],
+  [
+   "Label stiker, hanya harga",
+   "Label stiker custom",
+   500,
+   7,
+   12,
+   "PT Prima Sinar",
+   3,
+   false,
+   "llm",
+   4.2,
+   true
+  ],
+  [
+   "Lakban, hanya kecepatan",
+   "Lakban bening 2 inch",
+   100,
+   1,
+   11,
+   "UD Abadi Sinar",
+   1,
+   false,
+   "llm",
+   2.8,
+   true
+  ]
+ ],
+ "errors": [
+  [
+   "material tidak ada (id 999)",
+   "NotFound: Material id 999 tidak ditemukan",
+   true
+  ],
+  [
+   "semua bobot 0",
+   "Invalid: Minimal satu prioritas (harga, kecepatan, kualitas) harus lebih dari 0",
+   true
+  ],
+  [
+   "hapus vendor yang masih punya penawaran",
+   "Conflict: Tidak bisa dihapus: masih dipakai oleh 6 baris di vendor_materials",
+   true
+  ]
+ ]
+}

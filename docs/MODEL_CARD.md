@@ -38,6 +38,7 @@ For every recommendation the app computes LightGBM's per-feature contributions (
 - **Synthetic labels.** Labels come from a utility function we wrote (with hidden truth and noise). The results show the pipeline works and learns sensible trade-offs; they are not a measurement on Firaza's real decisions.
 - No feedback loop yet: the owner's actual choices are not used to retrain.
 - Prices, lead times, and reliability are assumed stable over the history window.
+- Edge case found in live testing: when **no** vendor can meet the deadline (e.g. premium hamper boxes within 1 day; the fastest takes 3), the order leans on price, and a vendor with a low on-time rate (55%) was ranked first. The app flags every vendor as missing the deadline so the user sees the risk. A fix would add training requests where no candidate meets the deadline, with labels that favor reliability in that case.
 
 ## Intended use
 Shortlisting and comparing vendors for a single material order at Firaza. Not for automatic purchasing.
