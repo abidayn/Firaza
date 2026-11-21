@@ -3,6 +3,7 @@
 The UI calls the same service layer as the REST API (backend/app/services.py),
 so both entry points behave identically.
 """
+import os
 import sys
 from contextlib import contextmanager
 from pathlib import Path
@@ -12,6 +13,14 @@ import streamlit as st
 BACKEND = Path(__file__).resolve().parents[1] / "backend"
 if str(BACKEND) not in sys.path:
     sys.path.insert(0, str(BACKEND))
+
+# Streamlit Cloud secrets -> environment variables, before the backend reads its settings
+try:
+    for _k, _v in st.secrets.items():
+        if isinstance(_v, (str, int, float)):
+            os.environ.setdefault(_k, str(_v))
+except Exception:  # no secrets file (plain local run): .env is used instead
+    pass
 
 from app import models, services  # noqa: E402
 from app.config import settings  # noqa: E402
