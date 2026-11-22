@@ -50,7 +50,7 @@
 | Item | File / link | Status |
 |---|---|---|
 | Project Brief | `submission/brief/Project Brief - DB15-I036.pdf` (+ .docx); official template not accessible yet | ✅ (add presentation video link) |
-| Usage guide or demo video | `docs/USER_GUIDE.md` and `submission/videos/demo_fitur_ai.mp4` (captioned, from the live app) | ✅ |
+| Usage guide (PDF, 8 pages, 0.6 MB) | `submission/guide/Panduan Penggunaan - DB15-I036.pdf` (also `docs/USER_GUIDE.md`; demo video `submission/videos/demo_fitur_ai.mp4`) | ✅ |
 | Slides (6-part outline) | `submission/slides/firaza_pitch.pptx` | ✅ |
 | 10-minute presentation video, face on camera, Indonesian | script `submission/videos/presentation_script.md` | ⏳ record + upload |
 | Submit the form before 22 Nov 23:59 WIB | — | ⏳ |

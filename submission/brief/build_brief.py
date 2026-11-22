@@ -22,8 +22,8 @@ from docx.oxml.ns import qn  # noqa: E402
 from docx.shared import Cm, Pt, RGBColor  # noqa: E402
 
 HERE = Path(__file__).resolve().parent
-SRC = HERE / "project_brief_draft.md"
-OUT = HERE / "Project Brief - DB15-I036.docx"
+SRC = Path(sys.argv[1]).resolve() if len(sys.argv) > 1 else HERE / "project_brief_draft.md"
+OUT = Path(sys.argv[2]).resolve() if len(sys.argv) > 2 else HERE / "Project Brief - DB15-I036.docx"
 FONT = "Inter"
 PURPLE = RGBColor(0x3C, 0x34, 0x89)
 
@@ -46,6 +46,7 @@ INLINE = re.compile(r"(\*\*[^*]+\*\*|`[^`]+`)")
 
 
 def add_runs(p, text, size=None):
+    text = re.sub(r"(?<![*\w])\*([^*\n]+)\*(?![*\w])", r"\1", text)
     for part in INLINE.split(text):
         if not part:
             continue
@@ -101,7 +102,7 @@ while i < len(lines):
         continue
     m = re.match(r"!\[(.*?)\]\((.*?)\)", line)
     if m:
-        img = (HERE / m.group(2)).resolve()
+        img = (SRC.parent / m.group(2)).resolve()
         if img.exists():
             doc.add_picture(str(img), width=Cm(15.5))
             doc.paragraphs[-1].alignment = WD_ALIGN_PARAGRAPH.CENTER
@@ -119,14 +120,19 @@ while i < len(lines):
     elif line.startswith("- "):
         p = doc.add_paragraph(style="List Bullet"); add_runs(p, line[2:])
     elif re.match(r"\d+\. ", line):
-        p = doc.add_paragraph(style="List Number"); add_runs(p, re.sub(r"^\d+\. ", "", line))
+        num, rest = line.split(". ", 1)
+        p = doc.add_paragraph()
+        p.paragraph_format.left_indent = Cm(0.9)
+        p.paragraph_format.first_line_indent = Cm(-0.6)
+        p.paragraph_format.space_after = Pt(3)
+        add_runs(p, f"{num}.  {rest}")
     else:
         p = doc.add_paragraph(); add_runs(p, line)
         p.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
     i += 1
 
 footer = sec.footer.paragraphs[0]
-footer.text = "Project Brief · DB15-I036 · Firaza Vendor Recommendation & Procurement Assistant"
+footer.text = os.getenv("DOC_FOOTER", "Project Brief · DB15-I036 · Firaza Vendor Recommendation & Procurement Assistant")
 footer.alignment = WD_ALIGN_PARAGRAPH.CENTER
 for r in footer.runs:
     r.font.size = Pt(8)
